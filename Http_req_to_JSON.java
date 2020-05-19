@@ -1,7 +1,9 @@
 //The return is a String JSONreponse
-public String readJSON(String str_containing_url)
+public String readJSON(String str_containing_url){
 //if url is null, don't make the http request (obviously)
-URL url = new URL(str_containing_url); // Here you can throw a MalformedURLException exception
+URL url;
+try{url = URL(str_containing_url);} // Here you should handle a MalformedURLException exception
+catch(MalformedURLException exception){Log.e("MainActivity","There is a malformedurlexception");}
 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
  urlConnection.setRequestMethod("GET");
 //urlConnection.setReadTimeout(10000 /* milliseconds */);
@@ -20,3 +22,4 @@ if(urlConnection.getResponseCode()==200){//then only proceed
 	return output.toString();
 }
 else return "";
+}
